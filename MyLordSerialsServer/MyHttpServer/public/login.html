@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="login-overlay"></div>
+<div class="login-box">
+    <div class="login-title">Авторизация</div>
+
+    <!-- Форма для отправки логина и пароля -->
+    <form action="/login" method="POST" class="login-form" id="loginForm">
+        <div class="login-input">
+            <input type="text" name="email" id="email" placeholder="Ваш email" required />
+            <span class="error-message" id="emailError"></span>
+        </div>
+        <div class="login-input">
+            <input type="password" name="password" id="password" placeholder="Ваш пароль" required />
+            <span class="error-message" id="passwordError"></span>
+        </div>
+        <!-- Кнопка входа -->
+        <div class="login-btn">
+            <button type="submit" class="btn-login btn">Войти на сайт</button>
+        </div>
+    </form>
+    
+</div>
+
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+
+        let isValid = true;
+
+        // Регулярное выражение для проверки email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            document.getElementById('emailError').textContent = 'Введите корректный email.';
+            isValid = false;
+        } else {
+            document.getElementById('emailError').textContent = '';
+        }
+
+        // Регулярное выражение для проверки пароля (минимум 6 символов, хотя бы 1 цифра)
+        const passwordRegex = /^(?=.*\d).{6,}$/;
+        if (!passwordRegex.test(password)) {
+            document.getElementById('passwordError').textContent = 'Пароль должен содержать минимум 6 символов и хотя бы одну цифру.';
+            isValid = false;
+        } else {
+            document.getElementById('passwordError').textContent = '';
+        }
+
+        if (!isValid) {
+            event.preventDefault(); // Останавливаем отправку формы, если валидация не пройдена
+        }
+    });
+
+</script>
+</body>
+</html>

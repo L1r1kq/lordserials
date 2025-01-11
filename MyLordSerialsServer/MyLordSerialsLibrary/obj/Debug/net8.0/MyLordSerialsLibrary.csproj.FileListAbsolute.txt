@@ -1,0 +1,11 @@
+/Users/l1r1k/RiderProjects/MyLordSerialsServer/MyLordSerialsLibrary/bin/Debug/net8.0/MyLordSerialsLibrary.deps.json
+/Users/l1r1k/RiderProjects/MyLordSerialsServer/MyLordSerialsLibrary/bin/Debug/net8.0/MyLordSerialsLibrary.dll
+/Users/l1r1k/RiderProjects/MyLordSerialsServer/MyLordSerialsLibrary/bin/Debug/net8.0/MyLordSerialsLibrary.pdb
+/Users/l1r1k/RiderProjects/MyLordSerialsServer/MyLordSerialsLibrary/obj/Debug/net8.0/MyLordSerialsLibrary.GeneratedMSBuildEditorConfig.editorconfig
+/Users/l1r1k/RiderProjects/MyLordSerialsServer/MyLordSerialsLibrary/obj/Debug/net8.0/MyLordSerialsLibrary.AssemblyInfoInputs.cache
+/Users/l1r1k/RiderProjects/MyLordSerialsServer/MyLordSerialsLibrary/obj/Debug/net8.0/MyLordSerialsLibrary.AssemblyInfo.cs
+/Users/l1r1k/RiderProjects/MyLordSerialsServer/MyLordSerialsLibrary/obj/Debug/net8.0/MyLordSerialsLibrary.csproj.CoreCompileInputs.cache
+/Users/l1r1k/RiderProjects/MyLordSerialsServer/MyLordSerialsLibrary/obj/Debug/net8.0/MyLordSerialsLibrary.dll
+/Users/l1r1k/RiderProjects/MyLordSerialsServer/MyLordSerialsLibrary/obj/Debug/net8.0/refint/MyLordSerialsLibrary.dll
+/Users/l1r1k/RiderProjects/MyLordSerialsServer/MyLordSerialsLibrary/obj/Debug/net8.0/MyLordSerialsLibrary.pdb
+/Users/l1r1k/RiderProjects/MyLordSerialsServer/MyLordSerialsLibrary/obj/Debug/net8.0/ref/MyLordSerialsLibrary.dll

@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ Панель - ЛордФильм</title>
+    <link rel="stylesheet" href="panel.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<div class="wrapper">
+    <!-- Боковое меню -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-tools"></i> Админ Панель</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="#"><i class="fas fa-home"></i> Главная</a></li>
+            <li><a href="#"><i class="fas fa-film"></i> Фильмы</a></li>
+            <li><a href="#"><i class="fas fa-tags"></i> Жанры</a></li>
+            <li><a href="#"><i class="fas fa-users"></i> Пользователи</a></li>
+            <li><a href="#"><i class="fas fa-comments"></i> Комментарии</a></li>
+            <li><a href="#"><i class="fas fa-cogs"></i> Настройки</a></li>
+            <li>
+                <form class="logout-form" action="/logout" method="POST">
+                    <button type="submit" class="logout-button"><i class="fas fa-sign-out-alt"></i> Выход</button>
+                </form>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Основной контент -->
+    <div class="main-content">
+        <header class="header">
+            <h1><i class="fas fa-chart-line"></i> Добро пожаловать в админ панель ЛордФильм!</h1>
+        </header>
+
+        <div class="content">
+            <!-- Раздел с фильмами -->
+            <section class="films">
+                <h2><i class="fas fa-film"></i> Управление фильмами</h2>
+                <div class="film-actions">
+                    <button class="btn add-film"><i class="fas fa-plus"></i> Добавить фильм</button>
+                </div>
+                <table class="films-table">
+                    <thead>
+                    <tr>
+                        <th>Название</th>
+                        <th>Оригинальное название</th>
+                        <th>Год</th>
+                        <th>Страна</th>
+                        <th>Режиссеры</th>
+                        <th>Рейтинг IMDB</th>
+                        <th>Рейтинг КП</th>
+                        <th>Лайки/Дизлайки</th>
+                        <th>Действия</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{FilmsTableRows}}
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Раздел с пользователями -->
+            <section class="users">
+                <h2><i class="fas fa-users"></i> Пользователи</h2>
+                <div class="user-actions">
+                    <button class="btn add-user"><i class="fas fa-user-plus"></i> Добавить пользователя</button>
+                </div>
+                <table class="users-table">
+                    <thead>
+                    <tr>
+                        <th>Имя</th>
+                        <th>Фамилия</th>
+                        <th>Почта</th>
+                        <th>Роль</th>
+                        <th>Действия</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{UsersTableRows}}
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно для редактирования фильма -->
+<!-- Модальное окно для добавления нового фильма -->
+<div id="addFilmModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Добавить новый фильм</h2>
+        <form id="addFilmForm" action="/add-film" method="POST">
+            <label for="title">Название:</label>
+            <input type="text" name="title" id="title" required>
+
+            <label for="originalTitle">Оригинальное название:</label>
+            <input type="text" name="originalTitle" id="originalTitle" required>
+
+            <label for="year">Год:</label>
+            <input type="number" name="year" id="year" required>
+
+            <label for="country">Страна:</label>
+            <input type="text" name="country" id="country" required>
+
+            <label for="directors">Режиссеры:</label>
+            <input type="text" name="directors" id="directors" required>
+
+            <label for="ratingIMDB">Рейтинг IMDB:</label>
+            <input type="number" name="ratingIMDB" id="ratingIMDB" step="0.1" min="0" max="10" required>
+
+            <label for="ratingKP">Рейтинг КП:</label>
+            <input type="number" name="ratingKP" id="ratingKP" step="0.1" min="0" max="10" required>
+
+            <label for="likes">Лайки:</label>
+            <input type="number" name="likes" id="likes" min="0" required>
+
+            <label for="dislikes">Дизлайки:</label>
+            <input type="number" name="dislikes" id="dislikes" min="0" required>
+
+            <label for="posterUrl">URL постера:</label>
+            <input type="url" name="posterUrl" id="posterUrl" required>
+
+            <label for="description">Описание:</label>
+            <textarea name="description" id="description" required></textarea>
+
+            <label for="moreTitle">Дополнительное название:</label>
+            <input type="text" name="moreTitle" id="moreTitle">
+
+            <label for="premiereDate">Дата премьеры:</label>
+            <input type="date" name="premiereDate" id="premiereDate">
+
+            <label for="actors">Актёры:</label>
+            <input type="text" name="actors" id="actors">
+
+            <label for="collections">Коллекции:</label>
+            <input type="text" name="collections" id="collections">
+
+            <label for="genre">Жанр:</label>
+            <input type="text" name="genre" id="genre" required>
+
+            <label for="translation">Перевод:</label>
+            <input type="text" name="translation" id="translation">
+
+            <label for="quality">Качество:</label>
+            <input type="text" name="quality" id="quality">
+
+            <label for="rating">Рейтинг:</label>
+            <input type="text" name="rating" id="rating">
+
+            <label for="newEpisode">Новый эпизод:</label>
+            <input type="text" name="newEpisode" id="newEpisode">
+
+            <label for="ageRestriction">Возрастное ограничение:</label>
+            <input type="text" name="ageRestriction" id="ageRestriction">
+
+            <label for="videoUrl">URL видео:</label>
+            <input type="url" name="videoUrl" id="videoUrl" required>
+
+            <button type="submit">Добавить</button>
+            <button type="button" class="close-modal">Отмена</button>
+        </form>
+    </div>
+</div>
+
+<!-- Модальное окно для редактирования фильма -->
+<div id="editFilmModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Редактировать фильм</h2>
+        <form id="editFilmForm" action="/edit-film" method="POST">
+            <input type="hidden" name="filmId" id="editFilmId">
+
+            <label for="editTitle">Название:</label>
+            <input type="text" name="title" id="editTitle" required>
+
+            <label for="editOriginalTitle">Оригинальное название:</label>
+            <input type="text" name="originalTitle" id="editOriginalTitle" required>
+
+            <label for="editYear">Год:</label>
+            <input type="number" name="year" id="editYear" required>
+
+            <label for="editCountry">Страна:</label>
+            <input type="text" name="country" id="editCountry" required>
+
+            <label for="editDirectors">Режиссеры:</label>
+            <input type="text" name="directors" id="editDirectors" required>
+
+            <label for="editRatingIMDB">Рейтинг IMDB:</label>
+            <input type="text" name="ratingIMDB" id="editRatingIMDB" step="0.1" min="0" max="10" required>
+
+            <label for="editRatingKP">Рейтинг КП:</label>
+            <input type="text" name="ratingKP" id="editRatingKP" step="0.1" min="0" max="10" required>
+
+            <label for="editLikes">Лайки:</label>
+            <input type="number" name="likes" id="editLikes" min="0" required>
+
+            <label for="editDislikes">Дизлайки:</label>
+            <input type="number" name="dislikes" id="editDislikes" min="0" required>
+
+            <label for="editPosterUrl">URL постера:</label>
+            <input type="url" name="posterUrl" id="editPosterUrl" required>
+
+            <label for="editDescription">Описание:</label>
+            <textarea name="description" id="editDescription" required></textarea>
+
+            <label for="editMoreTitle">Дополнительное название:</label>
+            <input type="text" name="moreTitle" id="editMoreTitle">
+
+            <label for="editPremiereDate">Дата премьеры:</label>
+            <input type="date" name="premiereDate" id="editPremiereDate">
+
+            <label for="editActors">Актёры:</label>
+            <input type="text" name="actors" id="editActors">
+
+            <label for="editCollections">Коллекции:</label>
+            <input type="text" name="collections" id="editCollections">
+
+            <label for="editGenre">Жанр:</label>
+            <input type="text" name="genre" id="editGenre" required>
+
+            <label for="editTranslation">Перевод:</label>
+            <input type="text" name="translation" id="editTranslation">
+
+            <label for="editQuality">Качество:</label>
+            <input type="text" name="quality" id="editQuality">
+
+            <label for="editRating">Рейтинг:</label>
+            <input type="text" name="rating" id="editRating">
+
+            <label for="editNewEpisode">Новый эпизод:</label>
+            <input type="text" name="newEpisode" id="editNewEpisode" value="true">
+
+            <label for="editAgeRestriction">Возрастное ограничение:</label>
+            <input type="text" name="ageRestriction" id="editAgeRestriction">
+
+            <label for="editVideoUrl">URL видео:</label>
+            <input type="url" name="videoUrl" id="editVideoUrl" required>
+
+            <button type="submit">Сохранить изменения</button>
+            <button type="button" class="close-modal">Отмена</button>
+        </form>
+    </div>
+</div>
+
+
+
+<!-- Модальное окно для подтверждения удаления -->
+<div id="deleteFilmModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Вы уверены, что хотите удалить фильм?</h2>
+        <form id="deleteFilmForm" action="/delete-film" method="POST">
+            <input type="hidden" name="filmId" id="deleteFilmId">
+            <button type="submit" class="btn delete">Удалить</button>
+            <button type="button" class="close-modal">Отмена</button>
+        </form>
+    </div>
+</div>
+
+<!-- Модальное окно для добавления нового пользователя -->
+<div id="addUserModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Добавить нового пользователя</h2>
+        <form id="addUserForm" action="/add-user" method="POST">
+            <label for="userFirstName">Имя:</label>
+            <input type="text" name="firstName" id="userFirstName" required>
+
+            <label for="userLastName">Фамилия:</label>
+            <input type="text" name="lastName" id="userLastName" required>
+
+            <label for="userEmail">Почта:</label>
+            <input type="email" name="email" id="userEmail" required>
+
+            <label for="userRole">Роль:</label>
+            <select name="role" id="userRole" required>
+                <option value="User">Пользователь</option>
+                <option value="Admin">Администратор</option>
+            </select>
+
+            <label for="userPassword">Пароль:</label>
+            <input type="password" name="password" id="userPassword" required>
+
+            <button type="submit">Добавить пользователя</button>
+            <button type="button" class="close-modal">Отмена</button>
+        </form>
+    </div>
+</div>
+
+
+<!-- Модальное окно для редактирования пользователя -->
+<div id="editUserModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Редактировать пользователя</h2>
+        <form id="editUserForm" action="/edit-user" method="POST">
+            <input type="hidden" name="userId" id="editUserId">
+
+            <label for="editUserFirstName">Имя:</label>
+            <input type="text" name="firstName" id="editUserFirstName" required>
+
+            <label for="editUserLastName">Фамилия:</label>
+            <input type="text" name="lastName" id="editUserLastName" required>
+
+            <label for="editUserEmail">Почта:</label>
+            <input type="email" name="email" id="editUserEmail" required>
+
+            <label for="editUserRole">Роль:</label>
+            <select name="role" id="editUserRole" required>
+                <option value="User">Пользователь</option>
+                <option value="Admin">Администратор</option>
+            </select>
+
+            <button type="submit">Сохранить изменения</button>
+            <button type="button" class="close-modal">Отмена</button>
+        </form>
+    </div>
+</div>
+
+<!-- Модальное окно для подтверждения удаления пользователя -->
+<div id="deleteUserModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Вы уверены, что хотите удалить пользователя?</h2>
+        <form id="deleteUserForm" action="/delete-user" method="POST">
+            <input type="hidden" name="userId" id="deleteUserId">
+            <button type="submit" class="btn delete">Удалить</button>
+            <button type="button" class="close-modal">Отмена</button>
+        </form>
+    </div>
+</div>
+
+
+<script>
+    // Открытие модального окна для редактирования фильма
+    function openEditFilmModal(button) {
+        // Получаем данные фильма из data-атрибутов кнопки
+        const filmId = button.getAttribute('data-film-id');
+        const title = button.getAttribute('data-title');
+        const originalTitle = button.getAttribute('data-originalTitle');
+        const year = button.getAttribute('data-year');
+        const country = button.getAttribute('data-country');
+        const directors = button.getAttribute('data-directors');
+        const ratingIMDB = button.getAttribute('data-ratingIMDB');
+        const ratingKP = button.getAttribute('data-ratingKP');
+        const likes = button.getAttribute('data-likes');
+        const dislikes = button.getAttribute('data-dislikes');
+        const posterUrl = button.getAttribute('data-posterUrl');
+        const description = button.getAttribute('data-description');
+        const moreTitle = button.getAttribute('data-moreTitle');
+        const premiereDate = button.getAttribute('data-premiereDate');
+        const actors = button.getAttribute('data-actors');
+        const collections = button.getAttribute('data-collections');
+        const genre = button.getAttribute('data-genre');
+        const translation = button.getAttribute('data-translation');
+        const quality = button.getAttribute('data-quality');
+        const rating = button.getAttribute('data-rating');
+        const newEpisode = button.getAttribute('data-newEpisode');
+        const ageRestriction = button.getAttribute('data-ageRestriction');
+        const videoUrl = button.getAttribute('data-videoUrl');
+
+        // Отладочные сообщения
+        console.log('Редактирование Фильма:', {
+            filmId, title, originalTitle, year, country, directors,
+            ratingIMDB, ratingKP, likes, dislikes, posterUrl,
+            description, moreTitle, premiereDate, actors, collections,
+            genre, translation, quality, rating, newEpisode,
+            ageRestriction, videoUrl
+        });
+
+        // Заполняем форму редактирования
+        document.getElementById('editFilmId').value = filmId;
+        document.getElementById('editTitle').value = title;
+        document.getElementById('editOriginalTitle').value = originalTitle;
+        document.getElementById('editYear').value = year;
+        document.getElementById('editCountry').value = country;
+        document.getElementById('editDirectors').value = directors;
+        document.getElementById('editRatingIMDB').value = ratingIMDB;
+        document.getElementById('editRatingKP').value = ratingKP;
+        document.getElementById('editLikes').value = likes;
+        document.getElementById('editDislikes').value = dislikes;
+        document.getElementById('editPosterUrl').value = posterUrl;
+        document.getElementById('editDescription').value = description;
+        document.getElementById('editMoreTitle').value = moreTitle;
+        document.getElementById('editPremiereDate').value = premiereDate;
+        document.getElementById('editActors').value = actors;
+        document.getElementById('editCollections').value = collections;
+        document.getElementById('editGenre').value = genre;
+        document.getElementById('editTranslation').value = translation;
+        document.getElementById('editQuality').value = quality;
+        document.getElementById('editRating').value = rating;
+        document.getElementById('editNewEpisode').value = newEpisode;
+        document.getElementById('editAgeRestriction').value = ageRestriction;
+        document.getElementById('editVideoUrl').value = videoUrl;
+
+        // Показываем модальное окно редактирования
+        document.getElementById('editFilmModal').style.display = 'block';
+    }
+
+    // Добавление обработчика события для кнопок "Редактировать"
+    document.querySelectorAll('.films-table .btn.edit').forEach(button => {
+        button.addEventListener('click', function() {
+            openEditFilmModal(this);
+        });
+    });
+
+    // Открытие модального окна для удаления фильма
+    function openDeleteFilmModal(filmId) {
+        document.getElementById('deleteFilmId').value = filmId;
+        document.getElementById('deleteFilmModal').style.display = 'block';
+    }
+
+    // Открытие модального окна для добавления нового фильма
+    function openAddFilmModal() {
+        document.getElementById('addFilmForm').reset();
+        document.getElementById('addFilmModal').style.display = 'block';
+    }
+
+    function openAddUserModal() {
+        document.getElementById('addUserForm').reset(); // Сброс формы
+        document.getElementById('addUserModal').style.display = 'block';
+    }
+
+    // Добавление обработчика события для кнопки "Добавить пользователя"
+    const addUserButton = document.querySelector('.btn.add-user');
+    if (addUserButton) {
+        addUserButton.addEventListener('click', openAddUserModal);
+    }
+
+    // Закрытие модальных окон
+    function closeModal() {
+        document.getElementById('editFilmModal').style.display = 'none';
+        document.getElementById('deleteFilmModal').style.display = 'none';
+        document.getElementById('addFilmModal').style.display = 'none';
+    }
+
+    // Добавление обработчика события для кнопки "Добавить фильм"
+    const addFilmButton = document.querySelector('.btn.add-film');
+    if (addFilmButton) {
+        addFilmButton.addEventListener('click', openAddFilmModal);
+    }
+
+    // Закрытие модальных окон по клику на крестик
+    const closeButtons = document.querySelectorAll('.close');
+    closeButtons.forEach(button => {
+        button.addEventListener('click', closeModal);
+    });
+
+    // Закрытие модальных окон по клику на кнопку "Отмена"
+    const closeModalButtons = document.querySelectorAll('.close-modal');
+    closeModalButtons.forEach(button => {
+        button.addEventListener('click', closeModal);
+    });
+
+    // Закрытие модальных окон по клику вне модального контента
+    window.addEventListener('click', function(event) {
+        const modals = document.querySelectorAll('.modal');
+        modals.forEach(modal => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    });
+
+    // Закрытие модальных окон по нажатию клавиши Esc
+    window.addEventListener('keydown', function(event) {
+        if (event.key === "Escape") {
+            closeModal();
+        }
+    });
+
+    // Добавление обработчиков события для кнопок "Удалить" в таблице фильмов
+    document.querySelectorAll('.films-table .btn.delete').forEach(button => {
+        button.addEventListener('click', function() {
+            const filmId = this.getAttribute('data-film-id');
+            document.getElementById('deleteFilmId').value = filmId;
+            document.getElementById('deleteFilmModal').style.display = 'block';
+        });
+    });
+
+   
+
+    // Добавление обработчика события для кнопок "Редактировать"
+    document.querySelectorAll('.films-table .btn.edit').forEach(button => {
+        button.addEventListener('click', function() {
+            openEditFilmModal(this);
+        });
+    });
+
+    // Обработчик формы редактирования фильма
+    const editFilmForm = document.getElementById('editFilmForm');
+    if (editFilmForm) {
+        editFilmForm.addEventListener('submit', function(event) {
+        });
+    }
+
+    // Добавление обработчиков события для кнопок "Редактировать пользователя"
+    document.querySelectorAll('.users-table .btn.edit-user').forEach(button => {
+        button.addEventListener('click', function() {
+            openEditUserModal(this);
+        });
+    });
+
+    // Функция для открытия модального окна редактирования пользователя
+    function openEditUserModal(button) {
+        const userId = button.getAttribute('data-user-id');
+        const firstName = button.getAttribute('data-first-name');
+        const lastName = button.getAttribute('data-last-name');
+        const email = button.getAttribute('data-email');
+        const role = button.getAttribute('data-role');
+
+        // Отладочные сообщения
+        console.log('Редактирование Пользователя:', {
+            userId, firstName, lastName, email, role
+        });
+
+        // Заполняем форму редактирования
+        document.getElementById('editUserId').value = userId;
+        document.getElementById('editUserFirstName').value = firstName;
+        document.getElementById('editUserLastName').value = lastName;
+        document.getElementById('editUserEmail').value = email;
+        document.getElementById('editUserRole').value = role;
+
+        // Показываем модальное окно редактирования пользователя
+        document.getElementById('editUserModal').style.display = 'block';
+    }
+
+    // Добавление обработчиков события для кнопок "Заблокировать/Разблокировать"
+    document.querySelectorAll('.users-table .btn.block-user').forEach(button => {
+        button.addEventListener('click', function() {
+            const userId = this.getAttribute('data-user-id');
+            const userStatus = this.getAttribute('data-user-status'); // true/false
+
+            // Обновляем модальное окно подтверждения блокировки/разблокировки
+            const actionText = userStatus === 'true' ? 'разблокировать' : 'заблокировать';
+            document.querySelector('#deleteUserModal h2').textContent = `Вы уверены, что хотите ${actionText} пользователя?`;
+            document.getElementById('deleteUserId').value = userId;
+
+            // Показываем модальное окно подтверждения
+            document.getElementById('deleteUserModal').style.display = 'block';
+        });
+    });
+
+    document.querySelectorAll('.users-table .btn.delete-user').forEach(button => {
+        button.addEventListener('click', function() {
+            const userId = this.getAttribute('data-user-id');
+            document.getElementById('deleteUserId').value = userId;
+            document.querySelector('#deleteUserModal h2').textContent = 'Вы уверены, что хотите удалить пользователя?';
+            document.getElementById('deleteUserModal').style.display = 'block';
+        });
+    });
+
+    const editUserForm = document.getElementById('editUserForm');
+    if (editUserForm) {
+        editUserForm.addEventListener('submit', function(event) {
+        });
+    }
+
+    const deleteUserForm = document.getElementById('deleteUserForm');
+    if (deleteUserForm) {
+        deleteUserForm.addEventListener('submit', function(event) {
+        });
+    }
+
+    
+</script>
+
+</body>
+</html>

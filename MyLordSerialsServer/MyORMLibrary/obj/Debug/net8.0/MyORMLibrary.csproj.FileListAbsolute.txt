@@ -1,0 +1,15 @@
+/Users/l1r1k/RiderProjects/MyLordSerialsServer/MyORMLibrary/bin/Debug/net8.0/MyORMLibrary.deps.json
+/Users/l1r1k/RiderProjects/MyLordSerialsServer/MyORMLibrary/bin/Debug/net8.0/MyORMLibrary.dll
+/Users/l1r1k/RiderProjects/MyLordSerialsServer/MyORMLibrary/bin/Debug/net8.0/MyORMLibrary.pdb
+/Users/l1r1k/RiderProjects/MyLordSerialsServer/MyORMLibrary/obj/Debug/net8.0/MyORMLibrary.GeneratedMSBuildEditorConfig.editorconfig
+/Users/l1r1k/RiderProjects/MyLordSerialsServer/MyORMLibrary/obj/Debug/net8.0/MyORMLibrary.AssemblyInfoInputs.cache
+/Users/l1r1k/RiderProjects/MyLordSerialsServer/MyORMLibrary/obj/Debug/net8.0/MyORMLibrary.AssemblyInfo.cs
+/Users/l1r1k/RiderProjects/MyLordSerialsServer/MyORMLibrary/obj/Debug/net8.0/MyORMLibrary.csproj.CoreCompileInputs.cache
+/Users/l1r1k/RiderProjects/MyLordSerialsServer/MyORMLibrary/obj/Debug/net8.0/MyORMLibrary.dll
+/Users/l1r1k/RiderProjects/MyLordSerialsServer/MyORMLibrary/obj/Debug/net8.0/refint/MyORMLibrary.dll
+/Users/l1r1k/RiderProjects/MyLordSerialsServer/MyORMLibrary/obj/Debug/net8.0/MyORMLibrary.pdb
+/Users/l1r1k/RiderProjects/MyLordSerialsServer/MyORMLibrary/obj/Debug/net8.0/ref/MyORMLibrary.dll
+/Users/l1r1k/RiderProjects/MyLordSerialsServer/MyORMLibrary/obj/Debug/net8.0/MyORMLibrary.csproj.AssemblyReference.cache
+/Users/l1r1k/RiderProjects/MyLordSerialsServer/MyORMLibrary/bin/Debug/net8.0/MyLordSerialsLibrary.dll
+/Users/l1r1k/RiderProjects/MyLordSerialsServer/MyORMLibrary/bin/Debug/net8.0/MyLordSerialsLibrary.pdb
+/Users/l1r1k/RiderProjects/MyLordSerialsServer/MyORMLibrary/obj/Debug/net8.0/MyORMLib.FCB61E28.Up2Date
